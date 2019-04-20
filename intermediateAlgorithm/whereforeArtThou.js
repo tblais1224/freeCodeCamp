@@ -8,11 +8,10 @@ function whatIsInAName(collection, source) {
     var arr = [];
     // Only change code below this line
     for (let i = 0; i < collection.length; i++) {
-        if (source instanceof collection[i]) {
+        console.log()
+        if (collection[i].hasOwnProperty(source)) {
             arr.push(collection[i])
         }
-
-
     }
 
     // Only change code above this line
