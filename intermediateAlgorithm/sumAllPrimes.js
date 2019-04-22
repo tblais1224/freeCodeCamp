@@ -6,15 +6,34 @@
 
 
 function sumPrimes(num) {
-    var primes = [1,2]
-    for (let i = 3; i <= num; i + 2) {
-        for (let j = 1; j < num; j++) {
-            const element = array[i];
-            
+    var primes = [2, 3, 5, 7, 11, 13, 17, 19]
+    var output = 0;
+    if (num < 23) {
+        for (let i = 0; i <= num; i++) {
+            if (primes[i] > num) {
+                return output;
+            } else {
+                output += primes[i];
+            }
         }
-        
+        return output;
+    } else {
+        for (let i = 23; i <= num; i + 2) {
+            var primeCheck = true;
+            for (let j = 0; j < primes.length; j++) {
+                if (i % primes[j] == 0) {
+                    primeCheck = false;
+                }
+            }
+            if (primeCheck === true) {
+                primes.push(i);
+            }
+        }
+        primes.forEach(element => {
+            output += element;
+        });
+        return output;
     }
-    return num;
 }
-  
-  sumPrimes(10);
+
+sumPrimes(31)
