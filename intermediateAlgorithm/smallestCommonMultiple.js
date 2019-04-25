@@ -7,15 +7,20 @@
 function smallestCommons(arr) {
   var rangeArr = [];
   //sorts in ascending order
-  arr.sort(function(a,b){return a-b})
+  arr.sort(function (a, b) {
+    return a - b
+  });
   for (let i = arr[0]; i <= arr[1]; i++) {
     rangeArr.push(i);
   }
-  for (let i = arr[1]*2; i > 0; i++) {
+  //multiply the greatest 3 values to get start point for increased efficiency
+  var startTestingNum = rangeArr[rangeArr.length-1]*rangeArr[rangeArr.length-2]*rangeArr[rangeArr.length-3];
+  for (let i = startTestingNum; i > 0; i += arr[1]) {
     var multipleCheck = true;
-    for (let j = 0; j < rangeArr.length; j++) {
-      if(i % rangeArr[j] !== 0){
-        multipleCheck = false
+    for (let j = rangeArr.length - 2; j >= 0; j--) {
+      if (i % rangeArr[j] !== 0) {
+        multipleCheck = false;
+        j = 0;
       }
     }
     if (multipleCheck === true) {
