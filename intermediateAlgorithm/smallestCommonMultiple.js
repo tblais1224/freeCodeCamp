@@ -6,17 +6,21 @@
 
 function smallestCommons(arr) {
   var rangeArr = [];
-  if (arr[0] > arr[1]) {
-    for (let i = arr[1]; i <= arr[0]; i++) {
-      rangeArr.push(i);
+  //sorts in ascending order
+  arr.sort(function(a,b){return a-b})
+  for (let i = arr[0]; i <= arr[1]; i++) {
+    rangeArr.push(i);
+  }
+  for (let i = arr[1]*2; i > 0; i++) {
+    var multipleCheck = true;
+    for (let j = 0; j < rangeArr.length; j++) {
+      if(i % rangeArr[j] !== 0){
+        multipleCheck = false
+      }
     }
-  } else {
-    for (let i = arr[0]; i <= arr[1]; i++) {
-      rangeArr.push(i);
+    if (multipleCheck === true) {
+      return i;
     }
   }
-  
-  return arr;
 }
-
-smallestCommons([1, 5]);
+smallestCommons([23, 18]);

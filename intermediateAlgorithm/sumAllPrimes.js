@@ -6,34 +6,28 @@
 
 
 function sumPrimes(num) {
-    var primes = [2, 3, 5, 7, 11, 13, 17, 19]
-    var output = 0;
-    if (num < 23) {
-        for (let i = 0; i <= num; i++) {
-            if (primes[i] > num) {
-                return output;
-            } else {
-                output += primes[i];
-            }
-        }
-        return output;
-    } else {
-        for (let i = 23; i <= num; i + 2) {
-            var primeCheck = true;
-            for (let j = 0; j < primes.length; j++) {
-                if (i % primes[j] == 0) {
-                    primeCheck = false;
-                }
-            }
-            if (primeCheck === true) {
-                primes.push(i);
-            }
-        }
-        primes.forEach(element => {
-            output += element;
-        });
-        return output;
+    var primes = [2];
+    if (num === 2) {
+        return 2;
+    } else if (num < 2) {
+        return 0;
     }
+    for (let i = 3; i <= num; i++) {
+        var checkPrime = true;
+        for (let j = 0; j < primes.length; j++) {
+            if (i % primes[j] === 0){
+                checkPrime = false;
+            }
+        }
+        if (checkPrime === true) {
+            primes.push(i)
+        }
+    }
+    var output = 0;
+    primes.forEach(element => {
+        output += element;
+    });
+    return output;
 }
 
-sumPrimes(31)
+sumPrimes(977)
