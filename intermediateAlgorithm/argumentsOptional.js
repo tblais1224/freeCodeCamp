@@ -10,23 +10,44 @@
 
 // If either argument isn't a valid number, return undefined.
 
-var holdInt = 0;
+// var holdInt = 0;
 
-function addTogether(a, b) {
-    if (arguments.length === 1 && Number.isInteger(arguments)) {
-        var sumNums = addTogether(a);
-        sumNums(a) {
-            return function (b) {
-                return x + y;
+// function addTogether(a, b) {
+//     if (arguments.length === 1 && Number.isInteger(arguments)) {
+//         var sumNums = addTogether(a);
+//         sumNums(a) {
+//             return function (b) {
+//                 return x + y;
 
-            };
+//             };
+//         }
+//     } else if (Number.isInteger(arguments[0]) && Number.isInteger(arguments[1])) {
+//         var output = arguments[0] + arguments[1];
+//         return output;
+//     } else {
+//         return undefined;
+//     };
+// }
+
+// addTogether(2)(3)
+
+
+
+
+function addTogether() {
+    if (arguments.length === 1 && Number.isInteger(arguments[0])) {
+        var sum = arguments[0];
+        return function (argument2){
+            if(Number.isInteger(arguments[0])){
+                return (sum + arguments[0]);
+            }
         }
     } else if (Number.isInteger(arguments[0]) && Number.isInteger(arguments[1])) {
-        var output = arguments[0] + arguments[1];
-        return output;
+        return (arguments[0] + arguments[1])
     } else {
-        return undefined;
-    };
+        return undefined
+    }
 }
 
-addTogether(2)(3)
+addTogether(2)(3);
+
