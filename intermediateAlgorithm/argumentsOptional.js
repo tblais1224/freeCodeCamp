@@ -10,29 +10,6 @@
 
 // If either argument isn't a valid number, return undefined.
 
-// var holdInt = 0;
-
-// function addTogether(a, b) {
-//     if (arguments.length === 1 && Number.isInteger(arguments)) {
-//         var sumNums = addTogether(a);
-//         sumNums(a) {
-//             return function (b) {
-//                 return x + y;
-
-//             };
-//         }
-//     } else if (Number.isInteger(arguments[0]) && Number.isInteger(arguments[1])) {
-//         var output = arguments[0] + arguments[1];
-//         return output;
-//     } else {
-//         return undefined;
-//     };
-// }
-
-// addTogether(2)(3)
-
-
-
 
 function addTogether() {
     if (arguments.length === 1 && Number.isInteger(arguments[0])) {
