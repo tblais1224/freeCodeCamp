@@ -12,18 +12,25 @@ For this challenge you will be presented with a string such as 800-692-7753 or 8
 
 
 function telephoneCheck(str) {
-  var newStr = str.replace(/[()-]/g, '').replace(/ /g, '');
-  if(isNaN(newStr) === false){
-    if(newStr.length === 11 && newStr[0] === '1'){
-      return true
-    }else if (newStr.length === 10){
-      return true
-    } else {
-      return false
-    }
-  }else {
+  var newStr = str.replace(/ /g, '');
+  if (newStr[0] === '1') {
+    newStr = newStr.slice(1);
+  }
+  if (newStr[0] === '(' && newStr[4] === ')') {
+    newStr = newStr.substr(1, 3) + newStr.substr(5)
+  }
+  if (newStr[3] === '-') {
+    newStr = newStr.substr(0, 3) + newStr.substr(4)
+  }
+  if (newStr[6] === '-') {
+    newStr = newStr.substr(0, 6) + newStr.substr(7)
+  }
+  
+  if (newStr.length === 10 && isNaN(newStr) === false) {
+    return true
+  } else {
     return false
   }
 }
 
-telephoneCheck("(555) 555-5555");
+telephoneCheck("1(555)555-5555")
