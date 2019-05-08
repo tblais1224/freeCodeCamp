@@ -56,31 +56,41 @@ function checkCashRegister(price, cash, cid) {
     const denominations = Object.keys(register)
     for (const denomination of denominations) {
         if (register[denomination].total === 0 || register[denomination].value > changeDue) {
-            change.change.push([denomination, 0])
+            change.change.unshift([denomination, 0])
         } else {
             var denomAmount = register[denomination].total / register[denomination].value;
             var denomCount = 0.00;
-            while (changeDue - register[denomination].value >= 0 && denomAmount > 0) {
-                //avoid float issue with decimals
-                var tempChangeDue = changeDue * 100;
-                tempChangeDue -= 100 * register[denomination].value;
-                changeDue = tempChangeDue/100
-                denomCount += register[denomination].value;
-                denomAmount--;
-            }
-            change.change.push([denomination, denomCount])
-        }
-    };
-    console.log(changeDue)
-    if (changeDue === 0) {
-        change.status = "CLOSED"
-        return (change)
-    } else {
-        return ({
-            status: "INSUFFICIENT_FUNDS",
-            change: []
-        })
-    }
-}
+            var denomNeeded = Math.floor(changeDue / register[denomination].value)
+            if (denomNeeded >= denomAmount) {
+                changeDue -= register[denomination].total;
+                change.change.unshift([denomination, register[denomination].total])
+                register[denomination].total = 0;
+            } else {
+                changeDue -= (register[denomination].value * denomNeeded)
+                register[denomination].value -= (register[denomination].value * denomNeeded);
+                change.change.unshift([denomination, (register[denomination].value * denomNeeded)])
+                }
 
-checkCashRegister(19.5, 20, [["PENNY", 0.5], ["NICKEL", 0], ["DIME", 0], ["QUARTER", 0], ["ONE", 0], ["FIVE", 0], ["TEN", 0], ["TWENTY", 0], ["ONE HUNDRED", 0]])
+                // while (changeDue - register[denomination].value >= 0 && denomAmount > 0) {
+                //     //avoid float issue with decimals
+                //     var tempChangeDue = changeDue * 100;
+                //     tempChangeDue -= 100 * register[denomination].value;
+                //     changeDue = tempChangeDue / 100
+                //     denomCount += register[denomination].value;
+                //     denomAmount--;
+                // }
+                // change.change.push([denomination, denomCount])
+            }
+        };
+        console.log(changeDue)
+        if (changeDue === 0) {
+            change.status = "CLOSED"
+            return (change)
+        } else {
+            return ({
+                status: "INSUFFICIENT_FUNDS",
+                change: []
+            })
+        }
+    }
+    checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
