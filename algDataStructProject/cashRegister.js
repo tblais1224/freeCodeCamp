@@ -7,10 +7,14 @@ Otherwise, return {status: "OPEN", change: [...]}, with the change due in coins 
 
 function checkCashRegister(price, cash, cid) {
     var change = {
-        status: String,
+        status: "CLOSED",
         change: []
     };
-    var changeDue = cash - price;
+    var changeOpen = {
+        status: "OPEN",
+        change: []
+    }
+    var changeDue = (cash - price) * 100;
     var register = {
         "ONE HUNDRED": {
             value: 100.00,
@@ -49,48 +53,43 @@ function checkCashRegister(price, cash, cid) {
             total: 0
         }
     }
-
+    //add cash to register
     cid.forEach(denomination => {
         register[denomination[0]].total = denomination[1]
     });
+
+    var openClose = "closed";
     const denominations = Object.keys(register)
     for (const denomination of denominations) {
-        if (register[denomination].total === 0 || register[denomination].value > changeDue) {
+        if (register[denomination].total === 0 || (register[denomination].value) * 100 > changeDue) {
             change.change.unshift([denomination, 0])
         } else {
-            var denomAmount = register[denomination].total / register[denomination].value;
-            var denomCount = 0.00;
-            var denomNeeded = Math.floor(changeDue / register[denomination].value)
-            if (denomNeeded >= denomAmount) {
-                changeDue -= register[denomination].total;
-                change.change.unshift([denomination, register[denomination].total])
+            var availableCash = register[denomination].total / register[denomination].value
+            if (Math.floor(changeDue / (register[denomination].value * 100)) >= availableCash) {
+                change.change.unshift([denomination, register[denomination].total]);
+                changeOpen.change.push([denomination, register[denomination].total]);
+                changeDue -= (register[denomination].total * 100);
                 register[denomination].total = 0;
             } else {
-                changeDue -= (register[denomination].value * denomNeeded)
-                register[denomination].value -= (register[denomination].value * denomNeeded);
-                change.change.unshift([denomination, (register[denomination].value * denomNeeded)])
-                }
-
-                // while (changeDue - register[denomination].value >= 0 && denomAmount > 0) {
-                //     //avoid float issue with decimals
-                //     var tempChangeDue = changeDue * 100;
-                //     tempChangeDue -= 100 * register[denomination].value;
-                //     changeDue = tempChangeDue / 100
-                //     denomCount += register[denomination].value;
-                //     denomAmount--;
-                // }
-                // change.change.push([denomination, denomCount])
+                change.change.unshift([denomination, (Math.floor(changeDue / (register[denomination].value * 100)) * register[denomination].value)]);
+                changeOpen.change.push([denomination, (Math.floor(changeDue / (register[denomination].value * 100)) * register[denomination].value)]);
+                changeDue -= ((Math.floor(changeDue / (register[denomination].value * 100))) * register[denomination].value *100)
+                register[denomination].total -= ((Math.floor(changeDue / (register[denomination].value * 100))) * register[denomination].value)
+                openClose = "open";
             }
         };
-        console.log(changeDue)
-        if (changeDue === 0) {
-            change.status = "CLOSED"
-            return (change)
-        } else {
-            return ({
-                status: "INSUFFICIENT_FUNDS",
-                change: []
-            })
-        }
     }
-    checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
+    console.log(changeDue)
+    if (changeDue === 0 && openClose === "closed") {
+        return (change)
+    } else if ((changeDue === 0 && openClose === "open")) {
+        return (changeOpen)
+    } else {
+        return ({
+            status: "INSUFFICIENT_FUNDS",
+            change: []
+        })
+    }
+}
+
+checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
