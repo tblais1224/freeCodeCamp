@@ -23,31 +23,4 @@ function nthPrime(n) {
     }
     return primes[primes.length - 1]
 }
-
-nthPrime(10);
-
-// while (primes.length < n) {
-
-//     if (testNumFun(testNum, primes) === true) {
-//         primes.push(testNum)
-//         testNum+=2
-//     } else {
-//         testNum+=2
-//     }
-// }
-// return primes[primes.length-1]
-// }
-
-// function testNumFun(num, primes) {
-// var newPrimes = []
-// for (let i = 0; i < primes.length; i++) {
-//     if (primes[i] <= Math.sqrt(num)) {
-//         newPrimes.push(primes[i])
-//     }else{i = primes.length}
-// }
-
-// for (let i = 1; i < newPrimes.length; i++) {
-//     if (num % primes[i] === 0) {
-//         return
-//     }
-// }
+nthPrime(10001);
