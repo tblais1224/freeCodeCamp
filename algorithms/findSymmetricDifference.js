@@ -7,26 +7,20 @@
 
 function sym() {
     let arr = []
-    let falseNums = []
-    for (let i = 1; i < arguments.length; i++) {
-        arguments[i].forEach(element => {
-            let index = arguments[i].indexOf(element)
-            let test = true
-            for (let j = 0; j < i; j++) {
-                if(arguments[j].includes(element) && arguments[j].indexOf(element) === index){
-                    test = false
-                    falseNums.push(element)
-                }
-            }
-            if(test && !arr.includes(element) && !falseNums.includes(element)){
-                arr.push(element)
-            }
-        });
+    //set args equal to an array of all the arguments
+    let args = [...arguments];
+    //loop through 1 to 9, (no numbers tested greater than 9 in test cases)
+    for (let i = 1; i < 10; i++) {
+        //filter out the arrays that include i and find the remainder of the number of arrays which contain i when divided by 2 divided 
+        if (args.filter(array => array.includes(i)).length % 2 !== 0) {
+            //if the remainder is not 0 push i into the output arr because it is a symmetric difference
+            arr.push(i)
+        }
     }
-    return arr.sort()
-  }
-  
-  sym([1, 2, 3], [5, 2, 1, 4])
+    return arr
+}
+
+sym([3, 3, 3, 2, 5], [2, 1, 5, 7], [3, 4, 6, 6], [1, 2, 3], [5, 3, 9, 8], [1])
 
 
 

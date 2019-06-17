@@ -8,6 +8,7 @@ function whatIsInAName(collection, source) {
     // Only change code below this line
 
     var keyArray = Object.keys(source);
+
     for (let i = 0; i < collection.length; i++) {
         var checker = true;
         for (let j = 0; j < keyArray.length; j++) {
@@ -22,6 +23,10 @@ function whatIsInAName(collection, source) {
     // Only change code above this line
     return arr;
 }
+
+
+//use keys.every()
+
 
 whatIsInAName([{
     first: "Romeo",
