@@ -6,12 +6,13 @@
 
 function sumFibs(num) {
     var fibNums = [0, 1];
+    //push nums to array while last two nums sum is less than or = to num
     do {
         fibNums.push(fibNums[fibNums.length - 1] + fibNums[fibNums.length - 2])
     } while (fibNums[fibNums.length - 1] + fibNums[fibNums.length - 2] <= num);
-
     var output = 0;
     for (let i = 0; i < fibNums.length; i++) {
+        //seperate odd numbers
         if (fibNums[i] / 2 !== parseInt(fibNums[i] / 2)) {
             output += fibNums[i];
         }
