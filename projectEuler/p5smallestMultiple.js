@@ -4,7 +4,7 @@
 // What is the smallest positive number that is evenly divisible by all of the numbers from 1 to n?
 
 function smallestMult(n) {
-    
+
   //split 1 to n into array
   const makeArr = (function(num) {
     let array = [];
@@ -14,6 +14,7 @@ function smallestMult(n) {
     return array;
   })(n);
 
+  
   //find prime multiples of each num in arr
   const primeMult = (function(arr) {
     let newArr = arr;
@@ -49,6 +50,7 @@ function smallestMult(n) {
     return nestArr;
   })(makeArr);
 
+
   //filter out highest occurance of each multiple in array
   const objVals = (function(primeMult) {
     const checkMostCommon = {};
@@ -69,10 +71,11 @@ function smallestMult(n) {
     return checkMostCommon;
   })(primeMult);
 
+
   let output = 1;
   Object.keys(objVals).forEach(num => (output *= objVals[num]));
   console.log(output);
   return output;
 }
 
-smallestMult(20);
+smallestMult(6);
