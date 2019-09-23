@@ -12,13 +12,15 @@
 
 
 function myReplace(str, before, after) {
-    var capitalCheckAfter = '';
-    if (before[0] == before[0].toUpperCase()) {
+    let capitalCheckAfter = '';
+
+    if (before[0] === before[0].toUpperCase()) {
         capitalCheckAfter += after[0].toUpperCase() + after.slice(1);
     } else {
         capitalCheckAfter = after;
     }
-    var output = str.replace(before, capitalCheckAfter);
+
+    let output = str.replace(before, capitalCheckAfter);
 
     return output;
 }

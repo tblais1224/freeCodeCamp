@@ -74,8 +74,34 @@ function smallestMult(n) {
 
   let output = 1;
   Object.keys(objVals).forEach(num => (output *= objVals[num]));
-  console.log(output);
   return output;
 }
 
-smallestMult(6);
+smallestMult(20);
+
+
+
+
+
+// free code camps recursive solution
+
+//LCM of two numbers
+function lcm(a, b){
+  return (a*b)/gcd(a, b);
+}
+
+//Euclidean recursive algorithm 
+function gcd(a, b){
+  if (b === 0) return a;
+  return gcd(b, a%b);
+}
+
+function smallestMult(n){
+  let maxLCM = 1;
+  
+  //Getting the LCM in the range
+  for (let i = 2; i <= n; i++){
+    maxLCM = lcm(maxLCM, i);
+  }
+  return maxLCM;
+}

@@ -10,14 +10,21 @@
 function translatePigLatin(str) {
     var tempString = '';
     var output = '';
+
     if (str[0] == 'a' || str[0] == 'e' || str[0] == 'i' || str[0] == 'o' || str[0] == 'u') {
+
         output = str + "way";
         return output;
+
     } else {
+
         for (let i = 0; i < str.length; i++) {
+
             if (str[i] == 'a' || str[i] == 'e' || str[i] == 'i' || str[i] == 'o' || str[i] == 'u') {
+                
                 output += str.slice(i) + tempString + "ay"
                 return output;
+
             } else {
                 tempString += str[i];
             }

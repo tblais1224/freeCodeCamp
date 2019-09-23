@@ -2,25 +2,41 @@
 
 // For example, if the first argument is [{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], and the second argument is { last: "Capulet" }, then you must return the third object from the array (the first argument), because it contains the name and its value, that was passed on as the second argument.
 
-function whatIsInAName(collection, source) {
-    // What's in a name?
-    var arr = [];
-    // Only change code below this line
+// function whatIsInAName(collection, source) {
+//     // What's in a name?
+//     var arr = [];
+//     // Only change code below this line
 
-    var keyArray = Object.keys(source);
-    for (let i = 0; i < collection.length; i++) {
-        var checker = true;
-        for (let j = 0; j < keyArray.length; j++) {
-            if (source[keyArray[j]] !== collection[i][keyArray[j]]) {
-                checker = false;
-            }
-        }
-        if (checker === true) {
-            arr.push(collection[i])
-        }
-    }
-    // Only change code above this line
-    return arr;
+//     var keyArray = Object.keys(source);
+
+//     for (let i = 0; i < collection.length; i++) {
+//         var checker = true;
+//         for (let j = 0; j < keyArray.length; j++) {
+//             if (source[keyArray[j]] !== collection[i][keyArray[j]]) {
+//                 checker = false;
+//             }
+//         }
+//         if (checker === true) {
+//             arr.push(collection[i])
+//         }
+//     }
+//     // Only change code above this line
+//     return arr;
+// }
+
+
+//use keys.every()
+
+
+
+const whatIsInAName = (collection, source) => collection.filter(obj => checkObjectForKeyValue(obj, source))
+
+const checkObjectForKeyValue = (obj, source) => {
+    let check = true;
+    Object.keys(source).forEach(key => {
+        if (source[key] !== obj[key]) check = false
+    })
+    return check
 }
 
 whatIsInAName([{
@@ -35,54 +51,3 @@ whatIsInAName([{
 }], {
     last: "Capulet"
 });
-
-
-
-
-
-
-
-
-
-// function whatIsInAName(collection, source) {
-//     // What's in a name?
-//     var arr = [];
-//     var sourceKey = Object.keys(source);
-//     if (sourceKey.length == 1) {
-//         var keyString = sourceKey[0]
-//         // Only change code below this line
-//         for (let i = 0; i < collection.length; i++) {
-//             // console.log(collection[i][keyString], source[keyString])
-//             if (collection[i][keyString] == source[keyString]) {
-//                 arr.push(collection[i])
-//             }
-//         }
-//     }else{
-//         var keyHolder = [];
-//         for (let i = 0; i < sourceKey.length; i++) {
-//             keyHolder.push(sourceKey[i]);
-
-//         }
-//     }
-
-
-
-//     // Only change code above this line
-//     return arr;
-// }
-
-// whatIsInAName([{
-//     "apple": 1,
-//     "bat": 2
-// }, {
-//     "apple": 1
-// }, {
-//     "apple": 1,
-//     "bat": 2,
-//     "cookie": 2
-// }, {
-//     "bat": 2
-// }], {
-//     "apple": 1,
-//     "bat": 2
-// });
