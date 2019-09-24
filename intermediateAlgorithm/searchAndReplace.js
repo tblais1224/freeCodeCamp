@@ -11,18 +11,36 @@
 
 
 
-function myReplace(str, before, after) {
-    let capitalCheckAfter = '';
+// function myReplace(str, before, after) {
+//     let capitalCheckAfter = '';
 
-    if (before[0] === before[0].toUpperCase()) {
-        capitalCheckAfter += after[0].toUpperCase() + after.slice(1);
-    } else {
-        capitalCheckAfter = after;
-    }
+//     if (before[0] === before[0].toUpperCase()) {
+//         capitalCheckAfter += after[0].toUpperCase() + after.slice(1);
+//     } else {
+//         capitalCheckAfter = after;
+//     }
 
-    let output = str.replace(before, capitalCheckAfter);
+//     let output = str.replace(before, capitalCheckAfter);
 
-    return output;
+//     return output;
+// }
+
+
+
+const myReplace = (str, before, after) => {
+    return str.split(" ").map(word => {
+        if (word === before) {
+            if (checkForCapCase(word)) return after.charAt(0).toUpperCase() + after.slice(1)
+            else return after
+        }
+        return word
+    }).join(" ")
 }
 
-myReplace("He is Sleeping on the couch", "Sleeping", "sitting")
+const checkForCapCase = (word) => {
+    if (word[0] === word[0].toUpperCase()) return true
+}
+
+
+
+console.log(myReplace("He is Sleeping on the couch", "Sleeping", "sitting"))
