@@ -7,30 +7,48 @@
 // Input strings are guaranteed to be English words in all lowercase.
 
 
-function translatePigLatin(str) {
-    var tempString = '';
-    var output = '';
+// function translatePigLatin(str) {
+//     var tempString = '';
+//     var output = '';
 
-    if (str[0] == 'a' || str[0] == 'e' || str[0] == 'i' || str[0] == 'o' || str[0] == 'u') {
+//     if (str[0] == 'a' || str[0] == 'e' || str[0] == 'i' || str[0] == 'o' || str[0] == 'u') {
 
-        output = str + "way";
-        return output;
+//         output = str + "way";
+//         return output;
 
-    } else {
+//     } else {
 
-        for (let i = 0; i < str.length; i++) {
+//         for (let i = 0; i < str.length; i++) {
 
-            if (str[i] == 'a' || str[i] == 'e' || str[i] == 'i' || str[i] == 'o' || str[i] == 'u') {
-                
-                output += str.slice(i) + tempString + "ay"
-                return output;
+//             if (str[i] == 'a' || str[i] == 'e' || str[i] == 'i' || str[i] == 'o' || str[i] == 'u') {
 
-            } else {
-                tempString += str[i];
-            }
-        }
-        return tempString + "ay";
-    }
+//                 output += str.slice(i) + tempString + "ay"
+//                 return output;
+
+//             } else {
+//                 tempString += str[i];
+//             }
+//         }
+//         return tempString + "ay";
+//     }
+// }
+
+
+
+const vowels = {
+    a: "a",
+    e: "e",
+    i: "i",
+    o: "o",
+    u: "u"
 }
 
-translatePigLatin("consonant");
+const translatePigLatin = (string) => {
+    if (vowels[string[0]]) return string += "way"
+    for (let index = 1; index < string.length; index++) {
+        if (vowels[string[index]]) return string.substring(index) + string.substring(0, index) + "ay"
+    }
+    return string + "ay"
+}
+
+console.log(translatePigLatin("consonant"));

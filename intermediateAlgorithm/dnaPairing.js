@@ -8,22 +8,13 @@
 
 // The character and its pair are paired up in an array, and all the arrays are grouped into one encapsulating array.
 
-
-function pairElement(str) {
-    var outputArr = []
-    for (let i = 0; i < str.length; i++) {
-        outputArr.push([str[i]])
-        if (str[i] == "A") {
-            outputArr[i].push("T")
-        } else if (str[i] == "T") {
-            outputArr[i].push("A")
-        } else if (str[i] == "C") {
-            outputArr[i].push("G")
-        } else {
-            outputArr[i].push("C")
-        }
-    }
-    return outputArr;
+const dnaPairs = {
+    G: "C",
+    C: "G",
+    A: "T",
+    T: "A"
 }
 
-pairElement("GCG");
+const pairElement = (dnaString) => dnaString.split("").map(dna => [dna, dnaPairs[dna]])
+
+console.log(pairElement("GCG"));
