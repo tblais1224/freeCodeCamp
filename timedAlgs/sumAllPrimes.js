@@ -6,11 +6,25 @@
 
 
 function sumPrimes(num) {
-    console.log(num)
-    return num;
+    let primes = [2]
+    for (let i = 3; i <= num; i += 2) {
+        let primeCheck = true
+        for (let j = 0; j < primes.length; j++) {
+            if (i % primes[j] === 0) {
+                primeCheck = false
+                break;
+            }
+        }
+        if (primeCheck) {
+            primes.push(i)
+        }
+    }
+    return primes.reduce((a,b) => a + b, 0);
 }
 
 sumPrimes(10);
+
+//completed in 6min
 
 
 sumPrimes(10) // should return a number.

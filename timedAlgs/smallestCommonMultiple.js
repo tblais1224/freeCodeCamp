@@ -6,12 +6,35 @@
 
 
 function smallestCommons(arr) {
-    console.log(arr)
-    return arr;
+    let smallestMult = 0
+    let range = []
+    for (let i = Math.min(...arr); i <= Math.max(...arr); i++) {
+        range.push(i)
+    }
+
+    while (true) {
+        smallestMult += range[range.length - 1]
+        let check = false
+        for (let i = 0; i < range.length; i++) {
+            if (smallestMult%range[i] !== 0) {
+                break
+            }
+            if (i === range.length -1) {
+                check = true
+            }
+        }
+        if (check) {
+            break
+        }
+    }
+    console.log(smallestMult)
+    return smallestMult;
 }
 
 
 smallestCommons([1, 5]);
+
+// completed in 8 minutes
 
 
 smallestCommons([1, 5]) // should return a number.
