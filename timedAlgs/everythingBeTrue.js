@@ -8,9 +8,13 @@
 
 
 function truthCheck(collection, pre) {
-    // Is everyone being true?
-    return pre;
+    for (let i = 0; i < collection.length; i++) {
+        if(!collection[i][pre] || collection[i][pre] === null) return false
+    }
+    return true;
 }
+
+// completed in 3 minutes
 
 truthCheck([{
     "user": "Tinky-Winky",
