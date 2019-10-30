@@ -14,7 +14,6 @@ const whatIsInAName = (arr, object) => {
     })
 }
 
-
 whatIsInAName([{
     first: "Romeo",
     last: "Montague"
