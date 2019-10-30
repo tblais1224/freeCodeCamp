@@ -14,12 +14,9 @@
 
 function addTogether(...args) {
     for (let i = 0; i < args.length; i++) {
-        if(!Number.isInteger(args[i])) return undefined
+        if (!Number.isInteger(args[i])) return undefined
     }
-
-    return args.length === 1 ? function getNum(n) {
-        return addTogether(n, args[0])
-    } : args[0] + args[1]
+    return args.length === 1 ? function getNum(n) { return addTogether(n, args[0]) } : args[0] + args[1]
 }
 
 // completed in 15 minutes
