@@ -11,10 +11,18 @@
 // If either argument isn't a valid number, return undefined.
 
 
-function addTogether() {
-    
-    return false;
+
+function addTogether(...args) {
+    for (let i = 0; i < args.length; i++) {
+        if(!Number.isInteger(args[i])) return undefined
+    }
+
+    return args.length === 1 ? function getNum(n) {
+        return addTogether(n, args[0])
+    } : args[0] + args[1]
 }
+
+// completed in 15 minutes
 
 addTogether(2, 3) // should return 5.
 addTogether(2)(3) // should return 5.
